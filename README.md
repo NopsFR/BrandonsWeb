@@ -7,7 +7,14 @@ without touching the layout.
 ## Stack
 
 React + TypeScript + Vite + Tailwind CSS v4, React Router (`HashRouter`, so it
-works on GitHub Pages with no server-side rewrites).
+works on GitHub Pages with no server-side rewrites), and Framer Motion for
+page transitions, the magnetic buttons, and the reader's scroll-aware UI.
+
+The background atmosphere (`src/components/atmosphere/`) is a small canvas
+of slow-drifting radial gradients blurred via CSS, plus a cursor-following
+ambient light on desktop — no particle libraries, no WebGL. Both fall back
+to a static frame under `prefers-reduced-motion` and simplify on small
+screens.
 
 ## Adding a comic
 

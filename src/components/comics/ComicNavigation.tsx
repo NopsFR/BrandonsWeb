@@ -10,15 +10,15 @@ export function ComicNavigation({ prev, next }: ComicNavigationProps) {
   if (!prev && !next) return null;
 
   return (
-    <nav aria-label="Chapter navigation" className="border-t border-line px-6 py-10">
+    <nav aria-label="Chapter navigation" className="border-t border-line px-6 py-12">
       <div className="mx-auto flex max-w-3xl items-stretch justify-between gap-4">
         {prev ? (
           <Link
             to={`/comics/${prev.slug}`}
-            className="group flex-1 border border-line px-4 py-4 text-left transition-colors hover:border-ash"
+            className="group glass flex-1 rounded-2xl border border-line px-5 py-4 text-left transition-colors duration-300 hover:border-line-strong"
           >
             <span className="label text-ash-dim">&larr; Previous</span>
-            <span className="mt-1 block truncate text-sm text-paper group-hover:text-crimson-bright">
+            <span className="mt-1 block truncate font-display text-fg transition-colors group-hover:text-blood">
               {prev.title}
             </span>
           </Link>
@@ -29,10 +29,10 @@ export function ComicNavigation({ prev, next }: ComicNavigationProps) {
         {next ? (
           <Link
             to={`/comics/${next.slug}`}
-            className="group flex-1 border border-line px-4 py-4 text-right transition-colors hover:border-ash"
+            className="group glass flex-1 rounded-2xl border border-line px-5 py-4 text-right transition-colors duration-300 hover:border-line-strong"
           >
             <span className="label text-ash-dim">Next &rarr;</span>
-            <span className="mt-1 block truncate text-sm text-paper group-hover:text-crimson-bright">
+            <span className="mt-1 block truncate font-display text-fg transition-colors group-hover:text-blood">
               {next.title}
             </span>
           </Link>

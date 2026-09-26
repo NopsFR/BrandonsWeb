@@ -1,15 +1,13 @@
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import type { ComicPage as ComicPageData } from "../../data/comics";
 
 interface ComicPageProps {
   page: ComicPageData;
-  totalPages: number;
 }
 
-export const ComicPage = forwardRef<HTMLDivElement, ComicPageProps>(function ComicPage(
-  { page, totalPages },
-  ref,
-) {
+export const ComicPage = forwardRef<HTMLDivElement, ComicPageProps>(function ComicPage({ page }, ref) {
+  const [loaded, setLoaded] = useState(false);
+
   return (
     <div ref={ref} data-page-number={page.pageNumber} className="relative mx-auto w-full max-w-3xl">
       <img
@@ -19,11 +17,9 @@ export const ComicPage = forwardRef<HTMLDivElement, ComicPageProps>(function Com
         height={page.height}
         loading="lazy"
         decoding="async"
-        className="block h-auto w-full"
+        onLoad={() => setLoaded(true)}
+        className={`block h-auto w-full transition-opacity duration-700 ease-out ${loaded ? "opacity-100" : "opacity-0"}`}
       />
-      <span className="label absolute bottom-3 right-3 bg-void/70 px-2 py-1 text-ash">
-        {page.pageNumber} / {totalPages}
-      </span>
     </div>
   );
 });

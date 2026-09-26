@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { biography, influences, portrait, projects, tools } from "../data/about";
 import { getActiveSocials, socials } from "../data/socials";
 import { PlaceholderPanel } from "../components/ui/PlaceholderPanel";
@@ -9,7 +10,7 @@ function ListSection({ title, items }: { title: string; items: AboutListItem[] }
     <div>
       <SectionLabel>{title}</SectionLabel>
       {items.length > 0 ? (
-        <ul className="mt-4 space-y-2 text-sm text-paper">
+        <ul className="mt-4 space-y-2 text-sm text-fg">
           {items.map((item) => (
             <li key={item.id}>
               {item.label}
@@ -18,7 +19,7 @@ function ListSection({ title, items }: { title: string; items: AboutListItem[] }
           ))}
         </ul>
       ) : (
-        <p className="mt-4 text-sm italic text-ash-dim">Not listed yet.</p>
+        <p className="mt-4 font-mono text-xs text-ash-dim">— not listed yet —</p>
       )}
     </div>
   );
@@ -28,26 +29,31 @@ export function About() {
   const activeSocials = getActiveSocials();
 
   return (
-    <div className="px-6 py-16 sm:py-24">
+    <div className="px-6 pb-32 pt-8 sm:pt-16">
       <div className="mx-auto max-w-3xl">
-        <header className="mb-12 text-center">
+        <motion.header
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-16 text-center"
+        >
           <p className="label text-ash-dim">About</p>
-          <h1 className="mt-2 text-4xl text-paper sm:text-5xl">Brandon</h1>
-        </header>
+          <h1 className="mt-2 font-display text-5xl text-fg sm:text-6xl">Brandon</h1>
+        </motion.header>
 
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-[220px_1fr] sm:gap-12">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-[240px_1fr] sm:gap-12">
           <PlaceholderPanel
-            label="Portrait pending"
-            className="aspect-square w-full sm:aspect-auto sm:h-full sm:min-h-[220px]"
+            label="Signal lost"
+            className="aspect-square w-full sm:aspect-auto sm:h-full sm:min-h-[240px]"
           />
 
           <div>
             {portrait === null && biography.length === 0 ? (
-              <p className="text-sm italic leading-relaxed text-ash-dim">
+              <p className="font-mono text-sm leading-relaxed text-ash-dim">
                 A biography hasn't been written yet — check back once Brandon adds one.
               </p>
             ) : (
-              <div className="space-y-4 font-body text-base normal-case leading-relaxed text-paper">
+              <div className="space-y-4 text-base leading-relaxed text-fg">
                 {biography.map((paragraph, index) => (
                   <p key={index}>{paragraph}</p>
                 ))}
@@ -56,7 +62,7 @@ export function About() {
           </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-10 border-t border-line pt-12 sm:grid-cols-3">
+        <div className="mt-20 grid grid-cols-1 gap-10 border-t border-line pt-12 sm:grid-cols-3">
           <ListSection title="Influences" items={influences} />
           <ListSection title="Tools" items={tools} />
           <ListSection title="Projects" items={projects} />
@@ -68,14 +74,14 @@ export function About() {
             <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
               {activeSocials.map((social) => (
                 <li key={social.id}>
-                  <a href={social.url} target="_blank" rel="noreferrer noopener" className="text-paper hover:text-crimson-bright">
+                  <a href={social.url} target="_blank" rel="noreferrer noopener" className="link-underline text-fg hover:text-blood">
                     {social.label}
                   </a>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="mt-4 text-sm italic text-ash-dim">
+            <p className="mt-4 font-mono text-xs text-ash-dim">
               No links published yet — {socials.map((s) => s.label).join(", ")} may appear here in time.
             </p>
           )}

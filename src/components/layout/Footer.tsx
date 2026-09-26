@@ -6,11 +6,11 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="hairline mt-24 bg-void">
-      <div className="mx-auto max-w-5xl px-6 py-12">
+    <footer className="relative mt-32 border-t border-line">
+      <div className="mx-auto max-w-5xl px-6 py-14">
         <div className="flex flex-col gap-10 sm:flex-row sm:justify-between">
           <div>
-            <p className="font-display text-lg tracking-wide text-paper">BRANDON</p>
+            <p className="font-display text-lg tracking-wide text-fg">BRANDON</p>
             <p className="mt-2 max-w-xs text-sm text-ash">An independent webcomic.</p>
           </div>
 
@@ -18,9 +18,9 @@ export function Footer() {
             <div>
               <p className="label mb-3 text-ash-dim">Site</p>
               <ul className="space-y-2 text-sm">
-                <li><Link to="/comics" className="text-ash hover:text-paper">Comics</Link></li>
-                <li><Link to="/archive" className="text-ash hover:text-paper">Archive</Link></li>
-                <li><Link to="/about" className="text-ash hover:text-paper">About</Link></li>
+                <li><Link to="/comics" className="link-underline text-ash hover:text-fg">Comics</Link></li>
+                <li><Link to="/archive" className="link-underline text-ash hover:text-fg">Archive</Link></li>
+                <li><Link to="/about" className="link-underline text-ash hover:text-fg">About</Link></li>
               </ul>
             </div>
 
@@ -34,7 +34,7 @@ export function Footer() {
                         href={social.url}
                         target="_blank"
                         rel="noreferrer noopener"
-                        className="text-ash hover:text-paper"
+                        className="link-underline text-ash hover:text-fg"
                       >
                         {social.label}
                       </a>
@@ -46,9 +46,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col-reverse justify-between gap-4 border-t border-line pt-6 text-xs text-ash-dim sm:flex-row">
+        <div className="mt-12 border-t border-line pt-6 text-xs text-ash-dim">
           <p>&copy; {year} Brandon. All rights reserved.</p>
-          <p className="font-hand text-base text-ash-dim">— drawn late at night —</p>
         </div>
       </div>
     </footer>
