@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+/*
+  Theme tokens. Fonts and colors live here as variables on purpose —
+  swap a value in one place and the whole site follows.
+*/
+@theme {
+  --font-display: "Big Shoulders", "Arial Narrow", sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-hand: "Caveat", cursive;
+
+  --color-void: #0c0b0a;
+  --color-void-soft: #14120f;
+  --color-paper: #ece7dc;
+  --color-paper-dim: #d8d1bf;
+  --color-ink: #17140f;
+  --color-ash: #8d8577;
+  --color-ash-dim: #5c574c;
+  --color-crimson: #6e1420;
+  --color-crimson-bright: #93222f;
+  --color-line: #35322c;
+
+  --tracking-label: 0.14em;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: var(--color-paper);
+    font-family: var(--font-body);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-crimson-bright);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--color-crimson);
+    color: var(--color-paper);
+  }
+}
+
+@layer utilities {
+  /* Subtle paper grain + vignette, applied once at the app root. Kept as a
+     fixed background layer so it never scrolls or repaints with content. */
+  .grain-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  }
+
+  .paper-texture {
+    background-color: var(--color-paper);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+
+  .label {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    font-size: 0.75rem;
+  }
+
+  .hairline {
+    box-shadow: 0 1px 0 0 var(--color-line);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
